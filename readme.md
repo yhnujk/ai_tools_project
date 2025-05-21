@@ -1,57 +1,69 @@
-# 🎨 AI-Tools: 당신의 게임과 앱에 생명을 불어넣는 AI 모듈 라이브러리 🚀
+# AI-Tools: AI 기반 게임/앱 모듈 컬렉션
 
----
+이 프로젝트는 게임 및 애플리케이션 개발에 활용할 수 있는 다양한 AI 기반 도구(모듈)들을 제공합니다. 현재 이미지 스타일 변환 및 챗봇 기능을 포함하고 있습니다.
 
-### ✨ 프로젝트 소개
+## 🚀 기능
 
-AI-Tools는 **인공지능의 강력한 기능을 당신의 애플리케이션에 손쉽게 통합하고 맞춤화할 수 있도록 돕는 혁신적인 파이썬 라이브러리**입니다. ... (이 부분은 당신의 아이디어를 자세히 설명하면 좋습니다.)
+* **이미지 스타일 변환 (Drawing):** 주어진 이미지와 텍스트 프롬프트를 사용하여 다양한 예술적 스타일로 이미지를 변환합니다. (예: 유화, 픽셀아트, 수묵화)
+* **AI 챗봇 (Chatbot):** 텍스트 기반 질문에 답변하거나, 이미지와 텍스트를 결합한 멀티모달 질문에 응답할 수 있습니다.
 
-### 🚀 주요 기능
+## ⚙️ 설치 및 사용법
 
-- **그림체 변환 (Drawing Module):** AI를 활용하여 2D 이미지의 스타일을 원하는 대로 변환합니다. (예: 사진을 만화체로, 스케치를 유화로)
-- **대화형 챗봇 (Chatbot Module):** AI 챗봇을 애플리케이션에 통합하여 자연어 기반의 대화 기능을 제공합니다. (텍스트, 멀티모달 지원)
+1.  **프로젝트 클론 (Clone the Repository):**
+    ```bash
+    git clone [https://github.com/yhnujk/ai_tools_project.git](https://github.com/yhnujk/ai_tools_project.git)
+    cd ai_tools_project
+    ```
 
-### 🛠️ 개발 환경 및 사용법
+2.  **가상 환경 설정 (Virtual Environment Setup):**
+    * **가상 환경 생성:**
+        ```bash
+        python -m venv .venv
+        ```
+    * **가상 환경 활성화:**
+        * Windows PowerShell:
+            ```powershell
+            .\.venv\Scripts\Activate.ps1
+            ```
+        * macOS / Linux:
+            ```bash
+            source ./.venv/bin/activate
+            ```
 
-1. **환경 설정:**
-   - Python 3.8 이상
-   - `pip install Pillow requests openai google-generativeai python-dotenv`
+3.  **의존성 설치 (Install Dependencies):**
+    * `setup.py`에 정의된 모든 필수 라이브러리를 설치합니다.
+    ```bash
+    pip install -e .
+    ```
 
-2. **API 키 설정:**
-   - 프로젝트 루트에 `.env` 파일을 생성하고 다음 형식으로 API 키를 저장합니다:
-     ```
-     OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
-     GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
-     ```
+4.  **API 키 설정 (API Key Configuration):**
+    * **API 키 발급처:**
+        * **Google Gemini API:** [Google AI Studio](https://aistudio.google.com/app/apikey) 또는 [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
+            * **`Create API Key`** 버튼을 클릭하여 키를 발급받으세요.
+        * **OpenAI API (DALL-E):** [OpenAI Platform](https://platform.openai.com/api-keys)
+            * **`Create new secret key`** 버튼을 클릭하여 키를 발급받으세요.
 
-3. **사용 예시:**
-   ```python
-   import ai_tools.drawing
-   import ai_tools.chatbot
-   import os
-   from PIL import Image
+    * **`.env` 파일 생성:**
+        프로젝트 루트 디렉토리 (`ai_tools_project/`)에 `.env`라는 이름의 파일을 생성하고 발급받은 API 키를 다음 형식으로 저장합니다. **이 파일은 `.gitignore`에 의해 버전 관리에서 제외되므로 GitHub에 올라가지 않습니다.**
 
-   # .env 파일에서 환경 변수 로드
-   from dotenv import load_dotenv
-   load_dotenv()
+        ```
+        # .env 파일 내용
+        OPENAI_API_KEY="sk-YOUR_OPENAI_API_KEY_HERE"
+        GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
+        ```
+        `YOUR_OPENAI_API_KEY_HERE`와 `YOUR_GEMINI_API_KEY_HERE`를 실제 발급받은 키로 교체하세요.
 
-   # 그림체 변환 예시
-   # (테스트를 위해 실제 이미지 경로로 변경하거나, dummy_input_image.png 파일을 만들어 사용하세요)
-   # Image.new('RGB', (200, 200), color = 'red').save("dummy_input_image.png")
-   # transformed_image_path = ai_tools.drawing.draw(
-   #     image_path="dummy_input_image.png",
-   #     style_prompt=input("원하는 그림체 스타일을 입력하세요: ")
-   # )
-   # if transformed_image_path:
-   #     print(f"변환된 이미지가 '{transformed_image_path}'에 저장되었습니다.")
+5.  **테스트 스크립트 실행 (Run Test Script):**
+    * 모든 설정이 완료되면, 다음 명령어로 라이브러리 기능을 테스트할 수 있습니다.
+    ```bash
+    python test_ai_tools.py
+    ```
+    이 스크립트는 이미지 변환 및 챗봇 기능을 시연합니다.
 
-   # 텍스트 챗봇 예시
-   # user_question = input("AI 챗봇에게 질문하세요: ")
-   # chat_response = ai_tools.chatbot.ask_text(user_question)
-   # if chat_response:
-   #     print(f"AI 챗봇 답변: {chat_response}")
-   ```
+## 🤝 기여 (Contributing)
 
-### 💡 기여 및 라이선스
+이 프로젝트는 오픈 소스로 개발될 예정입니다. 기여에 대한 내용은 [CONTRIBUTING.md](CONTRIBUTING.md) 파일을 참고해주세요.
 
-... (추후 추가)
+## 📄 라이선스 (License)
+
+이 프로젝트는 MIT 라이선스에 따라 배포됩니다. 자세한 내용은 `LICENSE` 파일을 참조하세요.
