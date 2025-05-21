@@ -44,14 +44,14 @@
             * **`Create new secret key`** 버튼을 클릭하여 키를 발급받으세요.
 
     * **`.env` 파일 생성:**
-        프로젝트 루트 디렉토리 (`ai_tools_project/`)에 `.env`라는 이름의 파일을 생성하고 발급받은 API 키를 다음 형식으로 저장합니다. **이 파일은 `.gitignore`에 의해 버전 관리에서 제외되므로 GitHub에 올라가지 않습니다.**
+        프로젝트 루트 디렉토리 (`ai_tools_project/`)에 `.env`라는 이름의 파일을 생성하고 발급받은 API 키를 다음 형식으로 저장합니다.
 
         ```
         # .env 파일 내용
         OPENAI_API_KEY="sk-YOUR_OPENAI_API_KEY_HERE"
         GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
         ```
-        `YOUR_OPENAI_API_KEY_HERE`와 `YOUR_GEMINI_API_KEY_HERE`를 실제 발급받은 키로 교체하세요.
+        `YOUR_OPENAI_API_KEY_HERE`를 OpenAI API 키로, `YOUR_GEMINI_API_KEY_HERE`를 Google Gemini Api에서 발급받은 키로 교체하세요.
 
 5.  **테스트 스크립트 실행 (Run Test Script):**
     * 모든 설정이 완료되면, 다음 명령어로 라이브러리 기능을 테스트할 수 있습니다.
