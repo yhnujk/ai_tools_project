@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyd
+*.so
+.Python
+env/
+venv/
+.venv/                 # 생성된 가상 환경 폴더 제외
+.env                   # API 키 등 민감 정보 파일 제외
+
+# 운영체제 관련
+.DS_Store              # macOS
+Thumbs.db              # Windows
+
+# 빌드 및 배포
+dist/
+build/
+*.egg-info/
+*.whl
+
+# AI 생성된 이미지 파일 (매번 달라질 수 있으므로)
+transformed_image.png
+output_image.png
