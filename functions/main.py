@@ -214,4 +214,4 @@ def chat_with_gemini(request: https_fn.Request) -> https_fn.Response:
     except Exception as e:
         print(json.dumps({"message": f"Internal Server Error: {e}"}),
             f"Error in chat_with_gemini function: {e}")
-        return https_fn.Response(f"Internal Server Error: {e}", status=500)
+        return https_fn.Response(f"Internal Server Error: {e}", status=500) 
