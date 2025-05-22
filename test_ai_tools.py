@@ -1,89 +1,65 @@
-# test_ai_tools.py
-import ai_tools.drawing
-import ai_tools.chatbot
+# ai_tools_project/test_ai_tools.py
+
 import os
-from PIL import Image
-
-# .env 파일에서 환경 변수 로드
-# 이 줄이 있어야 .env 파일에 저장된 API 키를 코드에서 사용할 수 있습니다.
 from dotenv import load_dotenv
-load_dotenv() 
+from PIL import Image # Pillow 라이브러리 임포트
 
-print("--- AI-Tools 라이브러리 통합 테스트 시작 ---")
+# .env 파일에서 환경 변수를 로드합니다.
+# 이 줄은 파일의 가장 위에 한 번만 있어야 합니다.
+load_dotenv()
 
-# --- 1. Drawing 모듈 테스트 ---
-print("\n--- Drawing 모듈 테스트 ---")
-# 테스트를 위한 더미 이미지 파일 생성 (실제 이미지 경로로 변경 가능)
-# 이 파일은 test_ai_tools.py가 실행되는 ai_tools_project 폴더에 생성됩니다.
-dummy_input_image_path = "test_input_image_for_drawing.png"
-try:
-    Image.new('RGB', (200, 200), color = 'red').save(dummy_input_image_path)
-    print(f"더미 입력 이미지 생성: {dummy_input_image_path}")
-except Exception as e:
-    print(f"오류: 더미 이미지 생성 실패: {e}")
-    dummy_input_image_path = None # 이미지 생성 실패 시 None으로 설정
+# ai_tools 패키지 내 모듈 임포트
+from ai_tools import drawing
+from ai_tools import chatbot # (아직 구현되지 않은 챗봇 모듈)
 
-if dummy_input_image_path:
-    user_drawing_style = input("🎨 원하는 그림체 스타일을 입력하세요 (예: 유화, 픽셀아트, 수묵화): ")
+def test_drawing_module():
+    print("\n--- Drawing 모듈 테스트 시작 ---")
 
-    # AI-Tools 라이브러리 drawing 모듈 호출
-    # 현재 drawing.py는 실제 API 호출 대신 더미 이미지를 생성합니다.
-    # API 키가 올바르게 설정되면 실제 DALL-E 호출로 대체될 수 있습니다.
-    output_drawing_path = ai_tools.drawing.draw(
-        image_path=dummy_input_image_path,
-        style_prompt=user_drawing_style,
-        output_path="my_styled_artwork.png" # 생성될 이미지 파일 이름
-    )
+    # --- 테스트를 위한 입력 이미지 파일 생성 ---
+    # 실제 이미지 파일이 없어도 테스트를 위해 임시 파일을 생성합니다.
+    input_image_path = "test_drawing_input.png" # 파일명 변경
+    try:
+        # 간단한 더미 이미지 생성 (사각형 안에 원)
+        img = Image.new('RGB', (400, 300), color = 'white')
+        pixels = img.load()
+        for i in range(img.size[0]):
+            for j in range(img.size[1]):
+                if (i - 200)**2 + (j - 150)**2 < 100**2: # 원 그리기
+                    pixels[i,j] = (0, 0, 255) # 파란색
+        img.save(input_image_path)
+        print(f"테스트 입력 이미지 '{input_image_path}' 생성 완료.")
+    except Exception as e:
+        print(f"오류: 테스트 입력 이미지 생성 실패: {e}")
+        return # 이미지 생성 실패 시 테스트 중단
 
-    if output_drawing_path:
-        print(f"변환된 이미지가 '{output_drawing_path}'에 저장되었습니다.")
-        # (선택 사항) 변환된 더미 이미지를 바로 확인
-        # try:
-        #     Image.open(output_drawing_path).show()
-        # except Exception as e:
-        #     print(f"변환된 이미지 표시 중 오류 발생: {e}")
+    output_image_path = "test_drawing_output.png" # 출력 파일명 변경
+    style = "cartoon style" # 테스트 스타일 변경 (예시)
+
+    print(f"'{input_image_path}' 이미지를 '{style}' 스타일로 변환 시도...")
+    generated_image_path = drawing.draw(input_image_path, style, output_image_path)
+
+    if generated_image_path and os.path.exists(generated_image_path):
+        print(f"성공: 테스트 이미지가 '{generated_image_path}'에 저장되었습니다.")
     else:
-        print("이미지 변환에 실패했습니다. API 키 설정 및 네트워크 연결을 확인하세요.")
-else:
-    print("더미 입력 이미지를 준비할 수 없어 Drawing 모듈 테스트를 건너뜝니다.")
+        print("실패: 테스트 이미지 생성 중 문제가 발생했습니다. 위 로그를 확인하세요.")
+
+    # 테스트 후 생성된 임시 입력 파일 삭제 (선택 사항)
+    try:
+        if os.path.exists(input_image_path):
+            os.remove(input_image_path)
+            print(f"임시 입력 이미지 '{input_image_path}' 삭제 완료.")
+    except Exception as e:
+        print(f"오류: 임시 파일 삭제 실패: {e}")
 
 
-# --- 2. Chatbot 모듈 테스트 (텍스트) ---
-print("\n--- Chatbot 모듈 테스트 (텍스트) ---")
-user_text_question = input("💬 AI 챗봇에게 텍스트로 질문하세요 (예: 오늘 날씨 어때?): ")
+def test_chatbot_module():
+    print("\n--- Chatbot 모듈 테스트 시작 ---")
+    # TODO: 챗봇 모듈이 구현되면 여기에 테스트 코드 추가
+    print("챗봇 모듈은 아직 구현 중입니다.")
 
-# AI-Tools 라이브러리 chatbot 모듈 호출 (텍스트 전용)
-text_response = ai_tools.chatbot.ask_text(user_text_question)
+if __name__ == "__main__":
+    # 각 모듈의 테스트 함수 호출
+    test_drawing_module()
+    test_chatbot_module()
 
-if text_response:
-    print(f"AI 챗봇 답변: {text_response}")
-else:
-    print("AI 챗봇 답변을 받지 못했습니다. Gemini API 키 설정 및 네트워크 연결을 확인하세요.")
-
-# --- 3. Chatbot 모듈 테스트 (멀티모달 - 이미지+텍스트) ---
-print("\n--- Chatbot 모듈 테스트 (멀티모달 - 이미지+텍스트) ---")
-dummy_input_image_path_vision = "test_input_image_for_vision.png"
-try:
-    Image.new('RGB', (300, 200), color = 'yellow').save(dummy_input_image_path_vision)
-    print(f"더미 비전 입력 이미지 생성: {dummy_input_image_path_vision}")
-except Exception as e:
-    print(f"오류: 더미 비전 이미지 생성 실패: {e}")
-    dummy_input_image_path_vision = None # 이미지 생성 실패 시 None으로 설정
-
-if dummy_input_image_path_vision:
-    user_vision_question = input(f"🖼️✨ {dummy_input_image_path_vision} 이미지에 대해 AI 챗봇에게 질문하세요 (예: 이 이미지는 무엇을 보여주나요?): ")
-
-    # AI-Tools 라이브러리 chatbot 모듈 호출 (멀티모달)
-    vision_response = ai_tools.chatbot.ask_vision(
-        image_path=dummy_input_image_path_vision,
-        question=user_vision_question
-    )
-
-    if vision_response:
-        print(f"AI 챗봇 (비전) 답변: {vision_response}")
-    else:
-        print("AI 챗봇 (비전) 답변을 받지 못했습니다. Gemini API 키 설정 및 네트워크 연결을 확인하세요.")
-else:
-    print("더미 비전 입력 이미지를 준비할 수 없어 멀티모달 챗봇 테스트를 건너뜝니다.")
-
-print("\n--- AI-Tools 라이브러리 통합 테스트 완료 ---")
+    print("\n--- 모든 모듈 테스트 완료 ---")
