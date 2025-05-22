@@ -94,7 +94,7 @@ python test_ai_tools.py
 
 ## 🛠️ 트러블슈팅 기록 (Troubleshooting Log)
 
-개발 및 실행 과정에서 발생할 수 있는 문제와 해결 방법은 [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md) 파일을 참조하세요.  
+개발 및 실행 과정에서 발생할 수 있는 문제와 해결 방법은 [`docs/troubleshooting.md`](docs/troubleshooting.md) 파일을 참조하세요.  
 (API 키 오류, 모델 버전 문제, 프롬프트 포맷 등 유용한 정보 포함)
 
 ---
