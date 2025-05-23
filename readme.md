@@ -109,7 +109,7 @@ python test_ai_tools.py
 ## 📄 라이선스 (License)
 
 이 프로젝트는 [MIT License](LICENSE)에 따라 배포됩니다.
-```
+
 ## ⚠️ 정책 및 사용 주의사항
 
 ai_tools는 사용자에게 창작의 자유를 제공하고자 하지만, 다음과 같은 사항에 유의해야 합니다:
