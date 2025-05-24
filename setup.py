@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='ai_tools', # 패키지 이름 (pip install ai_tools 로 설치될 이름)
-    version='0.1.0', # 패키지 버전
+    name='usingai', # 패키지 이름 (pip install usingai 로 설치될 이름)
+    version='0.1.1', # 패키지 버전
     author='Sang hyuck Won', # 당신의 이름 또는 닉네임
     author_email='yhnujk@naver.com', # 당신의 이메일 주소
     description='A collection of AI-powered tools for games and apps.', # 패키지 설명
-    long_description=open('README.md').read(), # README.md 내용을 긴 설명으로 사용
+    long_description=open('readme.md', encoding='utf-8').read(), # README.md 내용을 긴 설명으로 사용
     long_description_content_type='text/markdown', # long_description의 컨텐츠 타입
     url='https://github.com/yhnujk/ai_tools_project.git', # 당신의 GitHub 저장소 URL
     packages=find_packages(), # 'ai_tools'와 같은 모든 패키지 폴더를 자동으로 찾음

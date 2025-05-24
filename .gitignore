@@ -5,6 +5,9 @@
 venv/
 
 # API 키 (API Keys)
+dist/
+build/
+*.egg-info/
 .env
 
 # 생성된 이미지 파일 (Generated Images)
@@ -15,7 +18,7 @@ venv/
 
 # 파이썬 캐시 (Python Cache)
 __pycache__/
-*.pyc
+*.pyc 
 *.pyd
 *.pyo
 

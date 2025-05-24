@@ -7,6 +7,7 @@ from PIL import Image
 
 # .env 파일에서 환경 변수 로드
 load_dotenv()
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
 # Gemini API 키 설정
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
