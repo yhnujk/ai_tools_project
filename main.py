@@ -1,12 +1,51 @@
 # main.py
 
 import os
+import subprocess
 from dotenv import load_dotenv
-import ai_tools.drawing as drawing
+import ai_tools.drawing as drawing_ai
 import ai_tools.chatbot as chatbot # 챗봇 모듈 임포트
+
+# .env 파일 존재 확인 & 없으면 자동 실행
+if not os.path.exists(".env"):
+    print("⚠️ .env 파일이 없습니다. setup_api_keys.py를 실행합니다...\n")
+    subprocess.run(["python", "setup_api_keys.py"])
 
 # .env 파일 로드
 load_dotenv()
+
+# 키 유효성 검사
+openai_key = os.getenv("OPENAI_API_KEY")
+gemini_key = os.getenv("GEMINI_API_KEY")
+
+
+if not openai_key or not gemini_key:
+    print("❌ .env에 API 키가 설정되지 않았습니다. setup_api_keys.py를 다시 실행해주세요.")
+    exit()
+
+# ✅ 사용자 프롬프트 직접 입력 받기
+print("✅ API 키가 정상적으로 설정되었습니다.")
+
+# Gemeni 챗봇 테스트
+print("💬 Gemini 챗봇 테스트를 시작합니다.")
+
+user_input = input("질문을 입력하세요: ")
+chat_response = chatbot(user_input)
+
+if chat_response and isinstance(chat_response, str):
+    print(f"\n🤖 Gemini 응답: {chat_response}")
+else:
+    print("❌ 챗봇 응답을 받지 못했습니다. API 키가 올바른지 확인해주세요.")
+    exit()
+
+print("\n🎨 [DALL·E 스타일 이미지 생성 테스트]")
+image_prompt = input("🖼️ 어떤 이미지를 생성할까요?: ")
+image_url = drawing_ai(image_prompt)
+
+if image_url and image_url.startswith("http"):
+    print(f"\n🖼️ 생성된 이미지 URL:\n{image_url}")
+else:
+    print("❌ 이미지 생성에 실패했습니다. OpenAI API 키가 유효한지 확인해주세요.")
 
 print("AI-Tools v0.1.0 package initialized. Welcome to the future of AI-powered content creation!")
 

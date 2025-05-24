@@ -1,0 +1,7 @@
+firebase-functions
+firebase-admin        
+google-generativeai       
+openai                    
+Pillow                    
+requests                  
+python-dotenv
