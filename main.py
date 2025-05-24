@@ -7,16 +7,20 @@ import ai_tools.drawing as drawing_ai
 import ai_tools.chatbot as chatbot # 챗봇 모듈 임포트
 
 # .env 파일 존재 확인 & 없으면 자동 실행
-if not os.path.exists(".env"):
-    print("⚠️ .env 파일이 없습니다. setup_api_keys.py를 실행합니다...\n")
-    subprocess.run(["python", "setup_api_keys.py"])
 
-# .env 파일 로드
 load_dotenv()
-
-# 키 유효성 검사
 openai_key = os.getenv("OPENAI_API_KEY")
-gemini_key = os.getenv("GEMINI_API_KEY")
+gemini_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+
+def check_api_keys():
+    if not os.path.exists(".env"):
+        print("⚠️ .env 파일이 없습니다. API 키를 설정합니다...\n")
+        subprocess.run(["python", "setup_api_keys.py"])
+
+    if not openai_key or not gemini_key:
+        print("❌ 필수 API 키가 누락되었습니다. 종료합니다.")
+        return False
+    return True
 
 
 if not openai_key or not gemini_key:
@@ -81,7 +85,7 @@ def main():
             output_filename = f"output_{base_name}_{style_prompt.replace(' ', '_')}.jpg"
 
             # 이미지 변환 함수 호출
-            result_path = drawing.draw(input_image_path, style_prompt, output_filename)
+            result_path = drawing_ai.draw(input_image_path, style_prompt, output_filename)
 
             if result_path:
                 print(f"\n✅ 이미지 변환 성공! 결과는 '{result_path}'에 저장되었습니다.")

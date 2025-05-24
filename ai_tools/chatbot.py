@@ -13,8 +13,7 @@ genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # Gemini 챗봇 모델 초기화
-# gemini-pro는 텍스트 전용, gemini-1.5-flash는 멀티모달 (텍스트 + 이미지)
-CHAT_MODEL = 'gemini-pro'
+CHAT_MODEL = 'gemini-1.5-flash'
 VISION_MODEL = 'gemini-1.5-flash' # 이미지 처리를 위해 flash 모델 사용
 
 def chat_text_only(prompt: str) -> str | None:
