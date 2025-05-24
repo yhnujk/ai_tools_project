@@ -92,6 +92,12 @@ python test_ai_tools.py
 
 ---
 
+## 📋 진행 상황 보러가기
+
+👉 [✅ 개발 체크리스트 (checklist.md)](docs/checklist.md)
+
+---
+
 ## 🛠️ 트러블슈팅 기록 (Troubleshooting Log)
 
 개발 및 실행 과정에서 발생할 수 있는 문제와 해결 방법은 [`docs/troubleshooting.md`](docs/troubleshooting.md) 파일을 참조하세요.  
