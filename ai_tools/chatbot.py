@@ -1,9 +1,8 @@
-# ai_tools/chatbot.py
-
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
 from PIL import Image
+from typing import Optional
 
 # .env 파일에서 환경 변수 로드
 def setup_gemini_api() -> bool:
@@ -21,9 +20,9 @@ def setup_gemini_api() -> bool:
 
 # Gemini 챗봇 모델 초기화
 CHAT_MODEL = 'gemini-1.5-flash'
-VISION_MODEL = 'gemini-1.5-flash' # 이미지 처리를 위해 flash 모델 사용
+VISION_MODEL = 'gemini-1.5-flash'  # 이미지 처리를 위해 flash 모델 사용
 
-def chat_text_only(prompt: str) -> str | None:
+def chat_text_only(prompt: str) -> Optional[str]:
     if not setup_gemini_api():
         return None
     """
@@ -37,7 +36,7 @@ def chat_text_only(prompt: str) -> str | None:
         print(f"오류: 텍스트 챗봇 응답 생성 중 오류 발생: {e}")
         return None
 
-def chat_with_image(image_path: str, text_prompt: str) -> str | None:
+def chat_with_image(image_path: str, text_prompt: str) -> Optional[str]:
     if not setup_gemini_api():
         return None
     """
@@ -57,5 +56,5 @@ def chat_with_image(image_path: str, text_prompt: str) -> str | None:
         response = model.generate_content([text_prompt, img])
         return response.text
     except Exception as e:
-        print(f"오류: 이미지 포함 챗봇 응답 생성 중 오류 발생: {e}: {e}")
+        print(f"오류: 이미지 포함 챗봇 응답 생성 중 오류 발생: {e}")
         return None

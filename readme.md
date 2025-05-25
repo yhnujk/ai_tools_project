@@ -4,6 +4,7 @@
 게임 및 애플리케이션 개발에 사용할 수 있는 다양한 AI 기능들을 제공합니다.  
 현재 **이미지 스타일 변환** 및 **AI 챗봇** 기능을 포함하고 있습니다.
 
+For English, [click here for the English README](readme_eng_ver.md)
 ---
 
 ## 🚀 주요 기능
@@ -19,8 +20,17 @@
 ## 📦 설치 방법
 
 ```bash
-pip install usingai
+pip install usingai39(renpy 버전)
+pip install usingai311(최신 버전)
 ```
+PyPI 에서 직접 다운받으려면 
+```
+https://pypi.org/manage/project/usingai39/releases/ (python 3.9 버전. renpy 최적화 버전입니다.)
+
+https://pypi.org/manage/project/usingai311/releases/ (python 3.11버전. 최신 코딩에 좋습니다.)
+
+```
+
 
 ---
 
@@ -31,8 +41,14 @@ pip install usingai
 최초 실행 시 `.env` 파일이 없으면 자동으로 생성됩니다.  
 명령어 실행 후 안내에 따라 **OpenAI** 및 **Google Gemini** API 키를 입력하세요.
 
+
+🔑 아래 링크에서 각 API 키를 발급받을 수 있습니다:
+
+- [OpenAI API 키 발급하기](https://platform.openai.com/account/api-keys)
+- [Google Gemini API 키 발급하기](https://ai.google.dev/gemini-api/docs/get-started)
+
 ```bash
-python -m ai_tools.setup_api_keys
+python -m ai_tools.main
 ```
 
 또는 `main.py`를 바로 실행해도 자동으로 설정 스크립트가 호출됩니다.
@@ -41,11 +57,14 @@ python -m ai_tools.setup_api_keys
 
 ### 2. 실행 예시
 
-```bash
-python main.py
+실행 후 아래와 같은 메뉴가 제공됩니다:
+
+```
+💾 출력 이미지를 저장할 폴더를 입력하세요 (Enter 시 입력 이미지와 같은 위치):
+
 ```
 
-실행 후 아래와 같은 메뉴가 제공됩니다:
+이후 경로는 수정할 수 없으니 주의하세요!
 
 ```
 1. 이미지 스타일 변환
